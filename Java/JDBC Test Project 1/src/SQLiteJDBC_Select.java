@@ -8,7 +8,7 @@ public class SQLiteJDBC_Select {
         Statement stmt = null;
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:test.db");
+            c = DriverManager.getConnection(".\\..\\..\\..\\sqlite-tools\\infi.db");
             c.setAutoCommit(false);
             System.out.println("Opened database successfully");
 

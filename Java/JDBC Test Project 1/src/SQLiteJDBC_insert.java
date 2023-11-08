@@ -6,7 +6,7 @@ public class SQLiteJDBC_insert {
     public static void main( String args[] ) {
         Connection c = null;
         Statement stmt = null;
-        final String URL = "jdbc:sqlite:test.db";
+        final String URL = ".\\..\\..\\..\\sqlite-tools\\infi.db";
 
         try {
             Class.forName("org.sqlite.JDBC");

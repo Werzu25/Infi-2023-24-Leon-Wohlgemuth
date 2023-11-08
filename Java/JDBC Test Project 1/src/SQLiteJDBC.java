@@ -2,7 +2,7 @@ import java.sql.*;
 
 public class SQLiteJDBC {
     public static void main( String args[] ) {
-        final String URL = "jdbc:sqlite:test.db";
+        final String URL = ".\\..\\..\\..\\sqlite-tools\\infi.db";
         Connection c = null;
         Statement stmt = null;
 

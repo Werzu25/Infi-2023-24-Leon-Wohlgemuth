@@ -43,16 +43,20 @@ public class Main {
                         case "3":
                             System.out.println("What do you want to do:");
                             System.out.println("1. Select by ID");
-                            System.out.println("2. Select by Name");
-                            System.out.println("3. Chose form Table");
+                            //System.out.println("2. Select by Name");
+                            //System.out.println("3. Chose form Table");
                             System.out.println("4. Go back");
                             String insertMethod = scanner.nextLine();
                             switch (insertMethod) {
                                 case "1":
                                     System.out.println("Customer ID: ");
+                                    customers.showData();
+                                    scanner.reset();
                                     int customerID = scanner.nextInt();
                                     scanner.reset();
                                     System.out.println("Product ID: ");
+                                    products.showData();
+                                    scanner.reset();
                                     int productID  = scanner.nextInt();
                                     scanner.reset();
                                     System.out.println("Count: ");
@@ -62,10 +66,12 @@ public class Main {
                                     break;
                                 case "2":
                                     break;
+                                    /*
                                 case "3":
                                     break;
                                 case "4":
                                     break;
+                                    */
                             }
                             break;
                         case "4":
@@ -157,6 +163,7 @@ public class Main {
                     isRunning = false;
                     break;
             }
+            scanner.reset();
         }
     }
 }

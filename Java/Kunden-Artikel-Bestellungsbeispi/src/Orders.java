@@ -84,4 +84,11 @@ public class Orders {
             System.out.println();
         }
     }
+    public void updateTable(int customer_id, int product_id, int count) {
+        try {
+            jdbConnector.writeContent("Update table customers set customer_id = " + customer_id + ", product_id = " + product_id + ", count = " + count + "where customer_id = " + customer_id + "& product_id = " + product_id);
+        } catch (SQLException sqlException) {
+            System.out.println(sqlException);
+        }
+    }
 }

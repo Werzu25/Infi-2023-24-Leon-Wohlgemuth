@@ -44,4 +44,11 @@ public class Customers {
             System.out.println(sqlException);
         }
     }
+    public void updateTable(String name, String email, int customer_id) {
+        try {
+            jdbConnector.writeContent("Update customers set name = '" + name + "', email = '" + email + "' where customer_id = "+customer_id);
+        } catch (SQLException sqlException) {
+            System.out.println(sqlException);
+        }
+    }
 }

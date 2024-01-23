@@ -11,7 +11,7 @@ public class JDBConnector {
     }
     public void initializeDatabase() {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             System.out.println("Username: ");
             String user = scanner.nextLine();
             System.out.println("Password: ");

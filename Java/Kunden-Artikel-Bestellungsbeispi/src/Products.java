@@ -49,4 +49,11 @@ public class Products {
             System.out.println(sqlException);
         }
     }
+    public void updateTable(String designation, double price, int product_id) {
+        try {
+            jdbConnector.writeContent("Update table customers set designation = '" + designation + "', price = " + price + "where product_id = " + product_id);
+        } catch (SQLException sqlException) {
+            System.out.println(sqlException);
+        }
+    }
 }

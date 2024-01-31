@@ -6,7 +6,7 @@ public class Main {
         JDBConnector jdbConnector = new JDBConnector();
         Products products = new Products(jdbConnector);
         Customers customers = new Customers(jdbConnector);
-        Orders orders  = new Orders(jdbConnector);
+        Orders orders = new Orders(jdbConnector);
         jdbConnector.initializeDatabase();
         boolean isRunning = true;
         while (isRunning) {
@@ -38,14 +38,14 @@ public class Main {
                             designation = scanner.nextLine();
                             System.out.println("Price: ");
                             price = scanner.nextDouble();
-                            products.insertData(designation,price);
+                            products.insertData(designation, price);
                             break;
                         case "2":
                             System.out.println("Name: ");
                             name = scanner.nextLine();
                             System.out.println("Email: ");
-                            email  = scanner.nextLine();
-                            customers.insertData(name,email);
+                            email = scanner.nextLine();
+                            customers.insertData(name, email);
                             break;
                         case "3":
                             System.out.println("What do you want to do:");
@@ -61,10 +61,10 @@ public class Main {
                                     customerID = scanner.nextInt();
                                     System.out.println("Product ID: ");
                                     products.showData();
-                                    productID  = scanner.nextInt();
+                                    productID = scanner.nextInt();
                                     System.out.println("Count: ");
-                                    count  = scanner.nextInt();
-                                    orders.insertDataByID(customerID,productID,count);
+                                    count = scanner.nextInt();
+                                    orders.insertDataByID(customerID, productID, count);
                                     break;
                                 case "2":
                                     break;
@@ -189,7 +189,7 @@ public class Main {
                             name = scanner.nextLine();
                             System.out.println("Email: ");
                             email = scanner.nextLine();
-                            customers.updateTable(name,email,customerID);
+                            customers.updateTable(name, email, customerID);
                             break;
                         case "3":
                             orders.showData();
@@ -199,7 +199,7 @@ public class Main {
                             customerID = scanner.nextInt();
                             System.out.println("Count: ");
                             count = scanner.nextInt();
-                            orders.updateTable(customerID,productID,count);
+                            orders.updateTable(customerID, productID, count);
                             break;
                         case "4":
                             break;

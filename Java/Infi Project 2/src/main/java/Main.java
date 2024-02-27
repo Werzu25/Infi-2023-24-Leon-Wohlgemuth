@@ -21,19 +21,18 @@ public class Main {
         while (running) {
             Scanner scanner = new Scanner(System.in);
             System.out.println("Select your action [table/action]: ");
-            System.out.println("Actions x: [d] Delete Entry | [c] Create Entry | [u] Update Entry | [s] Show Entry");
+            System.out.println("Actions x: [d] Delete Entry | [c] Create Entry | [u] Update Entry | [s] Show Entry | [e] Export as JSON | [j] Join Tables");
             System.out.println("Select the Table: ");
             System.out.println("1x Products");
             System.out.println("2x Customers");
             System.out.println("3x Orders");
             System.out.println("4x Storage");
             System.out.println("5 Order Product");
-            System.out.println("6 Export as JSON");
-            System.out.println("7 Exit");
+            System.out.println("6 Exit");
             String action = scanner.nextLine();
             switch (action) {
                 case "1d":
-                    products.showData();
+                    products.showData("select * from products");
                     System.out.println("Product ID: ");
                     productID = scanner.nextLine();
                     products.deleteEntry(Integer.parseInt(productID));
@@ -67,7 +66,7 @@ public class Main {
                     customers.showData();
                     System.out.println();
                     System.out.println("Products:");
-                    products.showData();
+                    products.showData("select * from products");
                     System.out.println();
                     System.out.println("Customer ID: ");
                     customerID = scanner.nextLine();
@@ -95,7 +94,7 @@ public class Main {
                 case "3u":
                     break;
                 case "1s":
-                    products.showData();
+                    products.showData("select * from products");
                     break;
                 case "2s":
                     customers.showData();
@@ -106,6 +105,33 @@ public class Main {
                 case "4s":
                     storage.showData();
                     break;
+                case "1e":
+                    products.createJson();
+                case "2e":
+                    customers.createJson();
+                case "3e":
+                    orders.createJson();
+                case "j":
+                    System.out.println("How do you want to join the products table: ");
+                    System.out.println("1 Left Join");
+                    System.out.println("2 Right Join");
+                    System.out.println("3 Inner Join");
+                    System.out.println("4 Full Join");
+                    input = scanner.nextLine();
+                    switch (input) {
+                        case "1":
+                            products.showData("select * from orders inner join products p on p.product_id = orders.product_id");
+                            break;
+                        case "2":
+                            products.showData("select * from orders left join products p on p.product_id = orders.product_id");
+                            break;
+                        case "3":
+                            products.showData("select * from orders right join products p on p.product_id = orders.product_id");
+                            break;
+                        case "4":
+                            products.showData("select * from orders union select * from products");
+                            break;
+                    }
                 case "5":
                     System.out.println("Do you already have a customer account: y/n");
                     input = scanner.nextLine();
@@ -142,8 +168,5 @@ public class Main {
         } catch (NumberFormatException numberFormatException) {
             System.out.println("The number input format was wrong");
         }
-    }
-    public static void createJson() {
-        JSONObject jsonObject = new JSONObject();
     }
 }

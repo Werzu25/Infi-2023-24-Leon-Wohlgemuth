@@ -1,7 +1,9 @@
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.io.FileWriter;
+import java.io.IOException;
+import org.json.simple.JSONObject;
 
 public class Products {
     private Connection connection = null;
@@ -20,11 +22,10 @@ public class Products {
             System.out.println("There was an error in the SQL syntax");
         }
     }
-    public void showData() {
-        String[][] resultData = null;
+    public void showData(String sql) {
         int longestWord = 0;
         try {
-            resultData = connector.getSelectContent("select * from products");
+            String[][] resultData = connector.getSelectContent(sql);
             printData(resultData, longestWord);
         } catch (SQLException sqlException) {
             System.out.println(sqlException);
@@ -57,4 +58,30 @@ public class Products {
             System.out.println("There was an error in the SQL syntax");
         }
     }
+
+    public void createJson() {
+        JSONObject jsonObject = new JSONObject();
+        String[][] resultData = null;
+        int longestWord = 0;
+        try {
+            resultData = connector.getSelectContent("select * from products");
+        } catch (SQLException sqlException) {
+            System.out.println(sqlException);
+        } catch (ArrayIndexOutOfBoundsException | NullPointerException exception) {
+            System.out.println("The selected table is empty");
+        }
+        for (int i = 0; i < resultData.length; i++) {
+            for (int j = 0; j < resultData[i].length; j++) {
+                jsonObject.put(resultData[i],resultData[j]);
+            }
+        }
+        try {
+            FileWriter file = new FileWriter("./table.json");
+            file.write(jsonObject.toJSONString());
+            file.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

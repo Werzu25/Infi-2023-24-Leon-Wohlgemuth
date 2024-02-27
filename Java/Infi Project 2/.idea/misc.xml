@@ -6,11 +6,14 @@
       <list>
         <option value="$PROJECT_DIR$/Maven Infi Project/pom.xml" />
         <option value="$PROJECT_DIR$/Infi Maven/pom.xml" />
+        <option value="$PROJECT_DIR$/Maven/pom.xml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/Infi Maven/pom.xml" />
+        <option value="$PROJECT_DIR$/Maven/pom.xml" />
       </set>
     </option>
     <option name="workspaceImportForciblyTurnedOn" value="true" />

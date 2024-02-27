@@ -1,21 +1,22 @@
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.io.FileWriter;
+import java.io.IOException;
+import org.json.simple.JSONObject;
 
-public class Orders {
+public class Customers {
     private Connection connection = null;
     private Connector connector = null;
-    public Orders (Connector connector) {
+    public Customers (Connector connector) {
         this.connector = connector;
         connection = connector.getConnection();
     }
-    public void writeData(int customer_id, int order_id, int count) {
+    public void writeData(String name, String email) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO orders (customer_id,order_id,count) values (?, ?, ?)");
-            preparedStatement.setInt(1,customer_id);
-            preparedStatement.setInt(2,order_id);
-            preparedStatement.setInt(3,count);
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO customers (name,email) values ( ?, ?)");
+            preparedStatement.setString(1,name);
+            preparedStatement.setString(2,email);
             preparedStatement.executeUpdate();
         } catch (SQLException sqlException) {
             System.out.println("There was an error in the SQL syntax");
@@ -25,19 +26,7 @@ public class Orders {
         String[][] resultData = null;
         int longestWord = 0;
         try {
-            resultData = connector.getSelectContent("select * from orders");
-            printData(resultData, longestWord);
-        } catch (SQLException sqlException) {
-            System.out.println(sqlException);
-        } catch (ArrayIndexOutOfBoundsException | NullPointerException exception) {
-            System.out.println("The selected table is empty");
-        }
-    }
-    public void showDataById(int customerID, int productID) {
-        String[][] resultData = null;
-        int longestWord = 0;
-        try {
-            resultData = connector.getSelectContent("");
+            resultData = connector.getSelectContent("select * from customers");
             printData(resultData, longestWord);
         } catch (SQLException sqlException) {
             System.out.println(sqlException);
@@ -61,14 +50,37 @@ public class Orders {
         }
         System.out.println();
     }
-    public void deleteEntry(int id) {
+    public void deleteEntry(int customerID) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("delete from orders where product_id = ? or customer_id = ?");
-            preparedStatement.setInt(1,id);
-            preparedStatement.setInt(2,id);
+            PreparedStatement preparedStatement = connection.prepareStatement("delete from customers where (customer_id = ?)");
+            preparedStatement.setInt(1,customerID);
             preparedStatement.executeUpdate();
         } catch (SQLException sqlException) {
             System.out.println("There was an error in the SQL syntax");
+        }
+    }
+    public void createJson() {
+        JSONObject jsonObject = new JSONObject();
+        String[][] resultData = null;
+        int longestWord = 0;
+        try {
+            resultData = connector.getSelectContent("select * from customers");
+        } catch (SQLException sqlException) {
+            System.out.println(sqlException);
+        } catch (ArrayIndexOutOfBoundsException | NullPointerException exception) {
+            System.out.println("The selected table is empty");
+        }
+        for (int i = 0; i < resultData.length; i++) {
+            for (int j = 0; j < resultData[i].length; j++) {
+                jsonObject.put(resultData[i],resultData[j]);
+            }
+        }
+        try {
+            FileWriter file = new FileWriter("./table.json");
+            file.write(jsonObject.toJSONString());
+            file.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

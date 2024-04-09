@@ -15,7 +15,7 @@ public class Connector {
             String user = scanner.nextLine();
             System.out.println("Password: ");
             String password = scanner.nextLine();
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/customerproductexample", user, password);
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/infi_project1", user, password);
             statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         } catch (ClassNotFoundException e) {
             System.out.println(e);

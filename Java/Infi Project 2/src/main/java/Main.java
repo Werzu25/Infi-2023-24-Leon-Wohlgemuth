@@ -148,12 +148,14 @@ public class Main {
         }
     }
     public static void createCustomer(Scanner scanner,Customers customers) {
-        System.out.println("Name: ");
-        String name = scanner.nextLine();
+        System.out.println("First Name: ");
+        String first_name = scanner.nextLine();
+        System.out.println("Second Name: ");
+        String second_name = scanner.nextLine();
         System.out.println("E-Mail: ");
         String email = scanner.nextLine();
         try {
-            customers.writeData(name,email);
+            customers.writeData(first_name,second_name,email);
         } catch (NumberFormatException numberFormatException) {
             System.out.println("The number input format was wrong");
         }

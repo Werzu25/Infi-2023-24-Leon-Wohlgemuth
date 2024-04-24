@@ -33,7 +33,7 @@ import com.j256.ormlite.table.TableUtils;
 public class SimpleMain {
 
     // we are using the in-memory H2 database
-    private final static String DATABASE_URL = "jdbc:h2:~/projects/java/Infi-2023-24-Leon-Wohlgemuth/Java/ORMLite/src/test/java/org/example/account";
+    private final static String DATABASE_URL = "jdbc:sqlite:./src/test/java/org/example/account";
 
     private Dao<Account, Integer> accountDao;
 

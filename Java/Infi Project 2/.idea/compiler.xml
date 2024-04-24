@@ -10,7 +10,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Infi Project 2" />
+        <module name="InfiProject2" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

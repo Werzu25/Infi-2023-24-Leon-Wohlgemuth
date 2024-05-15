@@ -30,7 +30,6 @@ public class Connector {
     public void writeOrder(int productID, int customerID, int amount) throws SQLException {
         Orders orders = new Orders(productID,customerID,amount);
         orderDao.create(orders);
-        orderDao.updateId(orders,1);
     }
 
     public void deleteCustomer(int customerID) throws SQLException {

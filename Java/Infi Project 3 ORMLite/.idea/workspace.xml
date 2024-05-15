@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f43e7ef6-9699-4657-97ed-c82df0da4b56" name="Changes" comment="Added project" />
+    <list default="true" id="f43e7ef6-9699-4657-97ed-c82df0da4b56" name="Changes" comment="Added project">
+      <change afterPath="$PROJECT_DIR$/../Infi Project 4/src/main/java/org/example/Book.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Infi Project 4/src/main/java/org/example/DBWrapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Infi Project 4/src/main/java/org/example/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Infi Project 4/src/main/java/org/example/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ORMLite/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ORMLite/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,6 +25,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Werzu25&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Werzu25/Infi-2023-24-Leon-Wohlgemuth.git&quot;,
+    &quot;accountId&quot;: &quot;290de5eb-c787-449b-a8d3-3b2afd2be218&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -36,7 +53,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/werzu25/projects/java/Infi-2023-24-Leon-Wohlgemuth/Java/Infi Project 2&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/GitHub/Infi-2023-24-Leon-Wohlgemuth/Java/Infi Project 3 ORMLite&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -56,8 +73,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
-        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.15989.150" />
+        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-IU-241.15989.150" />
       </set>
     </attachedChunks>
   </component>
@@ -78,6 +95,11 @@
       <workItem from="1713506019358" duration="3000" />
       <workItem from="1713506033063" duration="3000" />
       <workItem from="1713937638509" duration="1035000" />
+      <workItem from="1713939077001" duration="1545000" />
+      <workItem from="1713943850290" duration="714000" />
+      <workItem from="1714124909016" duration="168000" />
+      <workItem from="1715754371519" duration="419000" />
+      <workItem from="1715755000263" duration="1692000" />
     </task>
     <task id="LOCAL-00001" summary="Added project">
       <option name="closed" value="true" />

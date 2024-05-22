@@ -14,7 +14,7 @@ public class Main {
             System.out.println("[1] Add a table entry [2] Delete a table entry [3] Update a table entry [4] View all table entries [5] Exit");
             char option = takeInput(scanner, new char[] { '1', '2', '3', '4', '5' });
             System.out.println("Enter the Table Name: ");
-            System.out.println("[1] Customer [2] Shelf [3] Book");
+            System.out.println("[1] Customer [2] LibraryWorker [3] Book");
             char table = takeInput(scanner, new char[] { '1', '2', '3' });
             Object object = new ArrayList<>();
             object = switch (table) {
@@ -28,7 +28,7 @@ public class Main {
                     yield new Customer(firstName, lastName, email);
                 }
                 case '2' -> {
-                    yield new Shelf();
+                    yield new LibraryWorker();
                 }
                 case '3' -> {
                     yield new Book();

@@ -2,7 +2,10 @@
 
 # Project Setup:
 
-Database: Postgre SQL
+Database: 
+
+Aktuell MySQL 
+Später PostgreSQL
 
 Language: Java
 
@@ -21,10 +24,20 @@ Buch Tabelle
 
 Kunden Tabelle
 
-## Nebenzile:
+Bücherei Arbeiter
+
+Lesungen
+
+### **Zusatzziele:**
 
 Kunden sollen 1-n Bücher ausleihen können
 
-Neuer kunde sollte erstellt werden können
+Neuer Kunde sollte erstellt werden können
 
 Neues Buch sollte erstellt werden können
+
+Bücherei Arbeiter verleihen Bücher
+
+Kunden sollen an 1-n Lesungen teilnehmen können
+
+An den Lesungen können 1-n Kunden Teilnehmen

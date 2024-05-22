@@ -4,19 +4,15 @@ package org.example;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
-import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
-import com.j256.ormlite.jdbc.JdbcConnectionSource;
-import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DBWrapper {
     private static String DATABASE_URL = "jdbc:mysql://localhost/";
     private Dao<Customer,Integer> customerDao;
-    private Dao<Shelf,Integer> shelfDao;
+    private Dao<LibraryWorker,Integer> libraryWorkerDao;
     private Dao<Book,Integer> bookDao;
 
 
@@ -41,19 +37,19 @@ public class DBWrapper {
 
     public void setupDatabase(ConnectionSource connectionSource) throws Exception {
         customerDao = DaoManager.createDao(connectionSource, Customer.class);
-        shelfDao = DaoManager.createDao(connectionSource, Shelf.class);
+        libraryWorkerDao = DaoManager.createDao(connectionSource, LibraryWorker.class);
         bookDao = DaoManager.createDao(connectionSource, Book.class);
 
         TableUtils.createTableIfNotExists(connectionSource, Customer.class);
-        TableUtils.createTableIfNotExists(connectionSource, Shelf.class);
+        TableUtils.createTableIfNotExists(connectionSource, LibraryWorker.class);
         TableUtils.createTableIfNotExists(connectionSource, Book.class);
     }
     public void insertTable(Object object) {
         try {
             if (object instanceof Customer) {
                 customerDao.create((Customer) object);
-            } else if (object instanceof Shelf) {
-                shelfDao.create((Shelf) object);
+            } else if (object instanceof LibraryWorker) {
+                libraryWorkerDao.create((LibraryWorker) object);
             } else if (object instanceof Book) {
                 bookDao.create((Book) object);
             }
@@ -63,6 +59,7 @@ public class DBWrapper {
     }
 
     public void updateTable(Object object) {
+
     }
 
     public void deleteTable(Object object) {

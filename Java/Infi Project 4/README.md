@@ -21,7 +21,7 @@ Buch Tabelle
 
 Kunden Tabelle
 
-## Nebenzile:
+## Nebenziele:
 
 Kunden sollen 1-n Bücher ausleihen können
 

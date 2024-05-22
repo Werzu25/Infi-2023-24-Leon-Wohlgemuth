@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f43e7ef6-9699-4657-97ed-c82df0da4b56" name="Changes" comment="Added project">
-      <change afterPath="$PROJECT_DIR$/../Infi Project 4/src/main/java/org/example/Book.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Infi Project 4/src/main/java/org/example/DBWrapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Infi Project 4/src/main/java/org/example/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Infi Project 4/src/main/java/org/example/Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ORMLite/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ORMLite/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Infi Project 4/src/main/java/org/example/DBWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Infi Project 4/src/main/java/org/example/DBWrapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Infi Project 4/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Infi Project 4/src/main/java/org/example/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +97,8 @@
       <workItem from="1713943850290" duration="714000" />
       <workItem from="1714124909016" duration="168000" />
       <workItem from="1715754371519" duration="419000" />
-      <workItem from="1715755000263" duration="1692000" />
+      <workItem from="1715755000263" duration="3192000" />
+      <workItem from="1715938893124" duration="33000" />
     </task>
     <task id="LOCAL-00001" summary="Added project">
       <option name="closed" value="true" />

@@ -13,10 +13,10 @@ Orm: Orm Lite
 
 ## Ziele:
 
-- [ ]  Many2Many Beziehung muss abgebildet sein
-- [ ]  Import/Export Funktionalität als JSON
-- [ ]  Menu Auswahl für Eingabe, Ausgabe, Export im Terminal
-- [ ]  Doku-README in GitHub wo Funktionalität und Menu erklärt wird
+- [x]  Many2Many Beziehung muss abgebildet sein
+- [x]  Import/Export Funktionalität als JSON
+- [x]  Menu Auswahl für Eingabe, Ausgabe, Export im Terminal
+- [x]  Doku-README in GitHub wo Funktionalität und Menu erklärt wird
 
 ## Database Setup:
 
@@ -41,3 +41,11 @@ Bücherei Arbeiter verleihen Bücher
 Kunden sollen an 1-n Lesungen teilnehmen können
 
 An den Lesungen können 1-n Kunden Teilnehmen
+
+## Funktionalität:
+
+Das Programm gibt dir die Auswahl zwischen developerMode und userMode.
+
+Im derveloper Mode kann man Einträge updaten, löschen und einfügen. Weiters hat man dort die Möglichkeit die Daten als JSON zu exportieren und importieren.
+
+Im user Mode muss man sich mit seiner Kunden Id anmelden und hat dann die Möglichkeit Bücher auszuleihen, Bücher zurückzugeben und an Lesungen teilzunehmen.

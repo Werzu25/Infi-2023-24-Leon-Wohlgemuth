@@ -28,13 +28,12 @@ public class BorrowedBook {
         this.borrowDate = borrowDate;
     }
 
-    public BorrowedBook(Book book, Customer customer) {
-        this.book = book;
-        this.customer = customer;
-    }
-
     public int getBorrowId() {
         return borrowId;
+    }
+
+    public void setBorrowId(int borrowId) {
+        this.borrowId = borrowId;
     }
 
     public Book getBook() {

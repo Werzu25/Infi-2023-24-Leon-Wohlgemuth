@@ -5,7 +5,6 @@ import com.j256.ormlite.table.DatabaseTable;
 import org.json.JSONObject;
 
 import java.sql.Date;
-import java.time.LocalDateTime;
 
 @DatabaseTable(tableName = "book")
 public class Book {
@@ -18,25 +17,32 @@ public class Book {
     @DatabaseField(columnName = "author", canBeNull = false)
     private String author;
 
-    @DatabaseField(columnName = "publicationYear")
-    private Date publicationYear;
+    @DatabaseField(columnName = "publicationDate")
+    private Date publicationDate;
 
     @DatabaseField(columnName = "publisher")
     private String publisher;
 
+    static boolean showId = true;
+
     public Book() {
     }
 
-    public Book(String title, String author, Date publicationYear, String publisher) {
+    public Book(String title, String author, Date publicationDate, String publisher) {
         this.title = title;
         this.author = author;
-        this.publicationYear = publicationYear;
+        this.publicationDate = publicationDate;
         this.publisher = publisher;
     }
 
     @Override
     public String toString() {
-        return String.format("Book Id: %-15s  Title: %-15s Author: %-15s Publication Year: %-15s Publisher: %-15s", bookId, title, author, publicationYear, publisher);
+        if (showId) {
+            return String.format("Book Id: %-15s  Title: %-15s Author: %-15s Publication Year: %-15s Publisher: %-15s", bookId, title, author, publicationDate, publisher);
+        }
+        else {
+            return String.format("Title: %-15s Author: %-15s Publication Year: %-15s Publisher: %-15s", title, author, publicationDate, publisher);
+        }
     }
 
     public int getBookId() {
@@ -63,12 +69,12 @@ public class Book {
         this.author = author;
     }
 
-    public Date getPublicationYear() {
-        return publicationYear;
+    public Date getPublicationDate() {
+        return publicationDate;
     }
 
-    public void setPublicationYear(Date publicationYear) {
-        this.publicationYear = publicationYear;
+    public void setPublicationDate(Date publicationDate) {
+        this.publicationDate = publicationDate;
     }
 
     public String getPublisher() {
@@ -84,7 +90,7 @@ public class Book {
         jsonObject.put("bookId", bookId);
         jsonObject.put("title", title);
         jsonObject.put("author", author);
-        jsonObject.put("publicationYear", publicationYear);
+        jsonObject.put("publicationDate", publicationDate);
         jsonObject.put("publisher", publisher);
         return jsonObject;
     }

@@ -24,21 +24,24 @@ public class DBWrapper {
 
 
     public void intiDB() {
-        ConnectionSource connectionSource = null;
-        Scanner scanner = new Scanner(System.in);
-        boolean running = true;
-        try {
-            System.out.println("Database Name: ");
-            String dbName = scanner.nextLine();
-            DATABASE_URL += dbName;
-            System.out.println("Username: ");
-            String password = scanner.nextLine();
-            System.out.println("Password: ");
-            String username = scanner.nextLine();
-            connectionSource = new JdbcConnectionSource(DATABASE_URL,username,password);
-            setupDatabase(connectionSource);
-        } catch (Exception e) {
-            e.printStackTrace();
+        boolean loginSuccess = false;
+        while (!loginSuccess) {
+            ConnectionSource connectionSource = null;
+            Scanner scanner = new Scanner(System.in);
+            try {
+                System.out.println("Database Name: ");
+                String dbName = scanner.nextLine();
+                String URL = DATABASE_URL + dbName;
+                System.out.println("Username: ");
+                String password = scanner.nextLine();
+                System.out.println("Password: ");
+                String username = scanner.nextLine();
+                connectionSource = new JdbcConnectionSource(URL,username,password);
+                setupDatabase(connectionSource);
+                loginSuccess = true;
+            } catch (Exception e) {
+                System.out.println("Wrong credentials");
+            }
         }
     }
 
@@ -182,9 +185,7 @@ public class DBWrapper {
                         queryBuilders.add(bookDao.queryBuilder());
                     }
                 }
-                if (queryBuilders.getFirst() != null) {
-                    return null;
-                }
+                if (queryBuilders.getFirst() == null) return null;
                 queryBuilder.join(queryBuilders.getFirst()).setWhere(where);
                 return queryBuilder.query();
             } catch (NoSuchElementException e) {

@@ -1,10 +1,8 @@
 package org.example;
 
 import java.sql.Date;
-import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -28,10 +26,14 @@ public class Main {
 
     private static void userMode(Scanner scanner, DBWrapper dbWrapper, boolean running) {
         boolean credentialsSet = false;
+        int customerId = 0;
         while (running) {
             System.out.println("[1] Borrow a Book [2] Return a Book [3] View all Books [4] Join Reading [5] View Borrowed Books [6] Log Out");
             char option = takeInput(scanner, new char[]{'1', '2', '3', '4', '5', '6'});
-            int customerId = 0;
+            if (option == '6') {
+                running = false;
+                break;
+            }
             if (!credentialsSet) {
                 System.out.println("Do you have a library card? [Y/N]");
                 char hasCard = takeInput(scanner, new char[]{'Y', 'N'});
@@ -60,7 +62,7 @@ public class Main {
                     dbWrapper.insertTable(new BorrowedBook((Book) dbWrapper.getEntriesById(new Book(),bookId), (Customer) dbWrapper.getEntriesById(new Customer(), customerId), Date.valueOf(LocalDate.now())));
                 }
                 case '2' -> {
-                    dbWrapper.viewTable(new BorrowedBook());
+                    getBorrowedBooks(dbWrapper, customerId);
                     System.out.println("Enter the ID of the book you want to return: ");
                     int bookId = Integer.parseInt(scanner.nextLine());
                     dbWrapper.deleteEntry(new BorrowedBook((Book) dbWrapper.getEntriesById(new Book(),bookId),(Customer) dbWrapper.getEntriesById(new Customer(), customerId)),0);
@@ -72,8 +74,11 @@ public class Main {
                     Random random = new Random();
                     int bookId = random.nextInt(0, dbWrapper.getEntries(new Book()).size());
                     int workerId = random.nextInt(0, dbWrapper.getEntries(new LibraryWorker()).size());
-                    System.out.println("Today's reading is brought to you by: " + dbWrapper.getEntries(new LibraryWorker()).get(workerId).toString());
+                    LibraryWorker worker = (LibraryWorker) dbWrapper.getEntries(new LibraryWorker()).get(workerId);
+                    System.out.println("Today's reading is brought to you by: " + worker.getFirstName() + " " + worker.getLastName());
+                    Book.showId = false;
                     System.out.println("In today's reading, we have: " + dbWrapper.getEntries(new Book()).get(bookId).toString());
+                    Book.showId = true;
                     ArrayList<Customer> customers = (ArrayList<Customer>) dbWrapper.getEntries(new Customer());
                     ArrayList<Customer> joiningCustomers = new ArrayList<>();
                     for (Customer customer : customers) {
@@ -81,8 +86,9 @@ public class Main {
                             joiningCustomers.add(customer);
                         }
                     }
-                    for (int i = 0; i < 20; i++) {
-                        System.out.println("Reading in progress...");
+                    System.out.println("Reading in progress:");
+                    for (int i = 0; i < 5; i++) {
+                        System.out.print('#');
                         try {
                             Thread.sleep(1000);
                         } catch (InterruptedException e) {
@@ -99,32 +105,25 @@ public class Main {
                             highestChance = bookChances.get(i);
                         }
                     }
-                    System.out.println("The winner of the book is: " + joiningCustomers.get(bookChances.indexOf(highestChance)).toString());
-                }
-                case '5' -> {
-                    ArrayList<Object> tables = new ArrayList<>();
-                    tables.add(new BorrowedBook());
-                    tables.add((Customer) dbWrapper.getEntriesById(new Customer(), customerId));
-                    ArrayList<Object> result = (ArrayList<Object>) dbWrapper.joinEntries(tables);
-                    if (result == null) {
-                        System.out.println("No borrowed books found.");
-                    } else  {
-                        for (Object object : result) {
-                            if (object instanceof BorrowedBook) {
-                                System.out.println(((BorrowedBook) object).getBook().toString());
-                            }
-                        }
+                    Customer winner = joiningCustomers.get(bookChances.indexOf(highestChance));
+                    System.out.println("The winner of the book is: " + winner.getFirstName() + " " + winner.getLastName());
+                    if (random.nextBoolean()) {
+                        System.out.println("The winner "+ winner.getFirstName() +" " + winner.getLastName() + " has borrowed the book.");
+                        dbWrapper.insertTable(new BorrowedBook((Book) dbWrapper.getEntriesById(new Book(),bookId), (Customer) dbWrapper.getEntriesById(new Customer(), winner.getCustomerId()), Date.valueOf(LocalDate.now())));
+                    } else {
+                        System.out.println("The winner "+ winner.getFirstName() +" " + winner.getLastName() + " has not borrowed the book.");
                     }
                 }
-                case '6' -> running = false;
+                case '5' -> {
+                    getBorrowedBooks(dbWrapper, customerId);
+                }
             }
-
         }
     }
 
     public static void developerMode(Scanner scanner, DBWrapper dbWrapper, boolean running) {
         while (running) {
-            JsonExporter jsonExporter = new JsonExporter(dbWrapper);
+            JsonHandler jsonHandler = new JsonHandler(dbWrapper);
             System.out.println("[1] Add a table entry [2] Delete a table entry [3] Update a table entry [4] View all table entries [5] Export as JSON [6] Import from Json [7] Exit");
             char option = takeInput(scanner, new char[]{'1', '2', '3', '4', '5', '6', '7'});
             boolean creatingNew = option == '1';
@@ -215,12 +214,12 @@ public class Main {
                 case '5' -> {
                     System.out.println("Enter the file name: ");
                     String fileName = scanner.nextLine();
-                    jsonExporter.exportToJson(fileName, dbWrapper.getEntries(object));
+                    jsonHandler.exportToJson(fileName, dbWrapper.getEntries(object));
                 }
                 case '6' -> {
                     System.out.println("Enter the file name: ");
                     String fileName = scanner.nextLine();
-                    jsonExporter.importFromJson(fileName);
+                    jsonHandler.importFromJson(fileName);
                 }
             }
         }
@@ -244,6 +243,22 @@ public class Main {
         else {
             System.out.println("Invalid Input. Please try again.");
             return takeInput(scanner, validInputs);
+        }
+    }
+
+    public static void getBorrowedBooks(DBWrapper dbWrapper, int customerId) {
+        ArrayList<Object> tables = new ArrayList<>();
+        tables.add(new BorrowedBook());
+        tables.add((Customer) dbWrapper.getEntriesById(new Customer(), customerId));
+        ArrayList<Object> result = (ArrayList<Object>) dbWrapper.joinEntries(tables);
+        if (result == null) {
+            System.out.println("No borrowed books found.");
+        } else  {
+            for (Object object : result) {
+                if (object instanceof BorrowedBook) {
+                    System.out.println(((BorrowedBook) object).getBook().toString());
+                }
+            }
         }
     }
 }

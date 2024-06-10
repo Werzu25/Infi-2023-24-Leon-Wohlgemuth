@@ -128,71 +128,74 @@ public class Main {
             System.out.println("[1] Add a table entry [2] Delete a table entry [3] Update a table entry [4] View all table entries [5] Export as JSON [6] Import from Json [7] Exit");
             char option = takeInput(scanner, new char[]{'1', '2', '3', '4', '5', '6', '7'});
             boolean creatingNew = option == '1';
+            boolean importing = option != '6';
             if (option == '7') {
                 running = false;
                 break;
             }
-            System.out.println("Enter the Table Name: ");
-            System.out.println("[1] Customer [2] Library Worker [3] Book [4] Borrowed Book");
-            char table = takeInput(scanner, new char[]{'1', '2', '3', '4'});
             Object object = new ArrayList<>();
-            object = switch (table) {
-                case '1' -> {
-                    if (!creatingNew) {
-                        yield new Customer();
+            if (importing) {
+                System.out.println("Enter the Table Name: ");
+                System.out.println("[1] Customer [2] Library Worker [3] Book [4] Borrowed Book");
+                char table = takeInput(scanner, new char[]{'1', '2', '3', '4'});
+                object = switch (table) {
+                    case '1' -> {
+                        if (!creatingNew) {
+                            yield new Customer();
+                        }
+                        String firstName, lastName, email;
+                        System.out.println("Enter First Name: ");
+                        firstName = scanner.nextLine();
+                        System.out.println("Enter Last Name: ");
+                        lastName = scanner.nextLine();
+                        System.out.println("Enter Email: ");
+                        email = scanner.nextLine();
+                        yield new Customer(firstName, lastName, email);
                     }
-                    String firstName, lastName, email;
-                    System.out.println("Enter First Name: ");
-                    firstName = scanner.nextLine();
-                    System.out.println("Enter Last Name: ");
-                    lastName = scanner.nextLine();
-                    System.out.println("Enter Email: ");
-                    email = scanner.nextLine();
-                    yield new Customer(firstName, lastName, email);
-                }
-                case '2' -> {
-                    if (!creatingNew) {
-                        yield new LibraryWorker();
+                    case '2' -> {
+                        if (!creatingNew) {
+                            yield new LibraryWorker();
+                        }
+                        String firstName, lastName;
+                        System.out.println("Enter First Name: ");
+                        firstName = scanner.nextLine();
+                        System.out.println("Enter Last Name: ");
+                        lastName = scanner.nextLine();
+                        yield new LibraryWorker(firstName, lastName);
                     }
-                    String firstName, lastName;
-                    System.out.println("Enter First Name: ");
-                    firstName = scanner.nextLine();
-                    System.out.println("Enter Last Name: ");
-                    lastName = scanner.nextLine();
-                    yield new LibraryWorker(firstName, lastName);
-                }
-                case '3' -> {
-                    if (!creatingNew) {
-                        yield new Book();
+                    case '3' -> {
+                        if (!creatingNew) {
+                            yield new Book();
+                        }
+                        String title, author, publisher, publicationYear;
+                        System.out.println("Enter Title: ");
+                        title = scanner.nextLine();
+                        System.out.println("Enter Author: ");
+                        author = scanner.nextLine();
+                        System.out.println("Enter Publisher: ");
+                        publisher = scanner.nextLine();
+                        System.out.println("Enter Publication Year: ");
+                        publicationYear = scanner.nextLine();
+                        yield new Book(title, author, Date.valueOf(publicationYear), publisher);
                     }
-                    String title, author, publisher, publicationYear;
-                    System.out.println("Enter Title: ");
-                    title = scanner.nextLine();
-                    System.out.println("Enter Author: ");
-                    author = scanner.nextLine();
-                    System.out.println("Enter Publisher: ");
-                    publisher = scanner.nextLine();
-                    System.out.println("Enter Publication Year: ");
-                    publicationYear = scanner.nextLine();
-                    yield new Book(title, author, Date.valueOf(publicationYear), publisher);
-                }
-                case '4' -> {
-                    if (!creatingNew) {
-                        yield new BorrowedBook();
+                    case '4' -> {
+                        if (!creatingNew) {
+                            yield new BorrowedBook();
+                        }
+                        int bookId, customerId;
+                        dbWrapper.viewTable(new Book());
+                        System.out.println("Enter Book ID: ");
+                        bookId = Integer.parseInt(scanner.nextLine());
+                        dbWrapper.viewTable(new Customer());
+                        System.out.println("Enter Customer ID: ");
+                        customerId = Integer.parseInt(scanner.nextLine());
+                        System.out.println("Enter Borrowed Date: ");
+                        Date borrowedDate = Date.valueOf(scanner.nextLine());
+                        yield new BorrowedBook((Book) dbWrapper.getEntriesById(new Book(), bookId), (Customer) dbWrapper.getEntriesById(new Customer(), customerId), borrowedDate);
                     }
-                    int bookId, customerId;
-                    dbWrapper.viewTable(new Book());
-                    System.out.println("Enter Book ID: ");
-                    bookId = Integer.parseInt(scanner.nextLine());
-                    dbWrapper.viewTable(new Customer());
-                    System.out.println("Enter Customer ID: ");
-                    customerId = Integer.parseInt(scanner.nextLine());
-                    System.out.println("Enter Borrowed Date: ");
-                    Date borrowedDate = Date.valueOf(scanner.nextLine());
-                    yield new BorrowedBook((Book) dbWrapper.getEntriesById(new Book(), bookId), (Customer) dbWrapper.getEntriesById(new Customer(), customerId),borrowedDate);
-                }
-                default -> throw new IllegalStateException("Unexpected value: " + table);
-            };
+                    default -> throw new IllegalStateException("Unexpected value: " + table);
+                };
+            }
             switch (option) {
                 case '1' -> {
                     dbWrapper.insertTable(object);

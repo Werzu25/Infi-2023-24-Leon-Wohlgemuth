@@ -37,7 +37,7 @@ public class Main {
             if (!credentialsSet) {
                 System.out.println("Do you have a library card? [Y/N]");
                 char hasCard = takeInput(scanner, new char[]{'Y', 'N'});
-                if (hasCard == 'N') {
+                if (hasCard == 'N' || dbWrapper.getEntries(new Customer()).isEmpty()) {
                     System.out.println("Enter your First Name: ");
                     String firstName = scanner.nextLine();
                     System.out.println("Enter your Last Name: ");
@@ -65,7 +65,7 @@ public class Main {
                     getBorrowedBooks(dbWrapper, customerId);
                     System.out.println("Enter the ID of the book you want to return: ");
                     int bookId = Integer.parseInt(scanner.nextLine());
-                    dbWrapper.deleteEntry(new BorrowedBook((Book) dbWrapper.getEntriesById(new Book(),bookId),(Customer) dbWrapper.getEntriesById(new Customer(), customerId)),0);
+                    dbWrapper.deleteEntry(new BorrowedBook((Book) dbWrapper.getEntriesById(new Book(),bookId),(Customer) dbWrapper.getEntriesById(new Customer(), customerId),null),0);
                 }
                 case '3' -> {
                     dbWrapper.viewTable(new Book());
@@ -95,6 +95,7 @@ public class Main {
                             e.printStackTrace();
                         }
                     }
+                    System.out.print("\nReading complete.");
                     ArrayList <Integer> bookChances = new ArrayList<>();
                     for (int i = 0; i < joiningCustomers.size(); i++) {
                         bookChances.add(random.nextInt(0,101));

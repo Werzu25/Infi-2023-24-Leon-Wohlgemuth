@@ -1,0 +1,23 @@
+{
+  "data": [
+    {
+      "firstName": "Julian",
+      "lastName": "Raffeiner",
+      "customerId": 1,
+      "email": "ju.raffeiner@tsn.at"
+    },
+    {
+      "firstName": "Christian",
+      "lastName": "Vohofer",
+      "customerId": 2,
+      "email": "ch.vorhofer@tsn.at"
+    },
+    {
+      "firstName": "Julian",
+      "lastName": "Raffeiner",
+      "customerId": 3,
+      "email": "ju.raff@tsn.at"
+    }
+  ],
+  "type": "Customer"
+}

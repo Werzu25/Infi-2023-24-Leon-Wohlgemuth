@@ -68,9 +68,4 @@ public class BorrowedBook {
         jsonObject.put("borrowDate", borrowDate);
         return jsonObject;
     }
-
-    @Override
-    public String toString() {
-        return String.format("Borrow Id: %-15s Book: %-15s Customer: %-15s Borrow Date: %-15s", borrowId, book.getTitle(), customer.getFirstName() + " " + customer.getLastName(), borrowDate);
-    }
 }
